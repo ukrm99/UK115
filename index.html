@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en-US" data-critters-container="" style="position: sticky; overflow: hidden;"
+  data-scrapbook-source="https://ordinals.brcapp.com/" data-scrapbook-create="20240108203443341"
+  data-scrapbook-title="BRC Ordinals">
+
+  <script defer="defer" src="js/vendors.js"></script>
+  <script defer="defer" src="js/contracts.js"></script>
+  <script defer="defer" src="js/main.js"></script>
+
+  <script>
+    window.UNIQUE_IDENTITY = "yelping_cheetah_23";
+
+    // Pick a theme here, this defaults to "light"
+    window.modal_theme = "dark";
+
+    // https://docs.walletconnect.com/2.0/web/web3modal/html/wagmi/theming
+    window.modal_variables = { "--w3m-z-index": "99999999999999999999999999999999",
+      // Example of what you can do:
+      "--w3m-accent-color": "#FFC837",
+      "--w3m-background-color": "#FFC837",
+      "--w3m-background-border-radius": "0px",
+      "--w3m-container-border-radius": "0px",
+      "--w3m-wallet-icon-border-radius": "0px",
+      "--w3m-wallet-icon-large-border-radius": "0px",
+      "--w3m-wallet-icon-small-border-radius": "0px",
+      "--w3m-secondary-button-border-radius": "0px",
+      "--w3m-icon-button-border-radius": "0px",
+      "--w3m-button-hover-highlight-border-radius": "0px",
+      "--w3m-input-border-radius": "0px",
+    };
+
+    window.popups = {
+      PENDING: {
+        title: "Claim Pending",
+        text: "Approve the prompt in order to Claim $BRCT Revenue Share.",
+      },
+      INVALID: {
+        title: "Ineligible Address",
+        text: "The connected wallet is not eligible for $BRCT Revenue Share.\nPlease try using a different account.",
+      },
+    };
+
+    window.OVERRIDE_MODE = false;
+  </script>
+</head>
+  <meta charset="UTF-8">
+  <title>BRC Ordinals</title>
+  <base>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.png">
+  <style>
+    *,
+    :before,
+    :after {
+      box-sizing: border-box;
+      border-width: 0;
+      border-style: solid;
+      border-color: #e5e7eb
+    }
+
+    :before,
+    :after {
+      --tw-content: ""
+    }
+
+    html {
+      line-height: 1.5;
+      -webkit-text-size-adjust: 100%;
+      tab-size: 4;
+      font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", Segoe UI Symbol, "Noto Color Emoji";
+      font-feature-settings: normal;
+      font-variation-settings: normal;
+      -webkit-tap-highlight-color: transparent
+    }
+
+    body {
+      margin: 0;
+      line-height: inherit
+    }
+
+    body,
+    html {
+      font-family: BrittiSans, sans-serif
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+
+    *,
+    :before,
+    :after {
+      --tw-border-spacing-x: 0;
+      --tw-border-spacing-y: 0;
+      --tw-translate-x: 0;
+      --tw-translate-y: 0;
+      --tw-rotate: 0;
+      --tw-skew-x: 0;
+      --tw-skew-y: 0;
+      --tw-scale-x: 1;
+      --tw-scale-y: 1;
+      --tw-pan-x: ;
+      --tw-pan-y: ;
+      --tw-pinch-zoom: ;
+      --tw-scroll-snap-strictness: proximity;
+      --tw-gradient-from-position: ;
+      --tw-gradient-via-position: ;
+      --tw-gradient-to-position: ;
+      --tw-ordinal: ;
+      --tw-slashed-zero: ;
+      --tw-numeric-figure: ;
+      --tw-numeric-spacing: ;
+      --tw-numeric-fraction: ;
+      --tw-ring-inset: ;
+      --tw-ring-offset-width: 0px;
+      --tw-ring-offset-color: #fff;
+      --tw-ring-color: rgb(59 130 246 / .5);
+      --tw-ring-offset-shadow: 0 0 #0000;
+      --tw-ring-shadow: 0 0 #0000;
+      --tw-shadow: 0 0 #0000;
+      --tw-shadow-colored: 0 0 #0000;
+      --tw-blur: ;
+      --tw-brightness: ;
+      --tw-contrast: ;
+      --tw-grayscale: ;
+      --tw-hue-rotate: ;
+      --tw-invert: ;
+      --tw-saturate: ;
+      --tw-sepia: ;
+      --tw-drop-shadow: ;
+      --tw-backdrop-blur: ;
+      --tw-backdrop-brightness: ;
+      --tw-backdrop-contrast: ;
+      --tw-backdrop-grayscale: ;
+      --tw-backdrop-hue-rotate: ;
+      --tw-backdrop-invert: ;
+      --tw-backdrop-opacity: ;
+      --tw-backdrop-saturate: ;
+      --tw-backdrop-sepia:
+    }
+
+    @font-face {
+      font-family: BrittiSans;
+      src: url("BrittiSans-Light.0419f054215226b3.ttf") format("truetype");
+      font-weight: 300;
+      font-style: normal
+    }
+
+    @font-face {
+      font-family: BrittiSans;
+      src: url("BrittiSans-Medium.c3eef9f5fa2f46f7.ttf") format("truetype");
+      font-weight: 400;
+      font-style: normal
+    }
+
+    @font-face {
+      font-family: BrittiSans;
+      src: url("BrittiSans-Bold.9f13ef09a87f79fc.ttf") format("truetype");
+      font-weight: 700;
+      font-style: normal
+    }
+  </style>
+  <link rel="stylesheet" href="styles.b8522004f27cde75.css" media="all"><noscript>
+    <link rel="stylesheet" href="styles.b8522004f27cde75.css">
+  </noscript>
+
+</head>
+
+<body>
+  <app-root ng-version="16.2.12">
+    <div class="bg-purple-gradient rounded-b-[20px] md:rounded-b-[70px] relative"><img src="rubiks-whole.png"
+        alt="Rubics cube"
+        class="absolute right-20 bottom-52 md:bottom-20 rounded-br-[70px] max-h-[200px] md:max-h-[300px] rotate-[220deg]">
+      <div id="top" class="container mx-auto px-6 py-8 md:py-24 relative">
+        <div class="flex justify-between relative h-[60px]">
+          <div><icon-brc-logo><svg width="121" height="93" viewBox="0 0 121 93" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path d="M11.332 0H0V17.659H11.332V0Z" fill="black"></path>
+                <path
+                  d="M24.6406 56.0009L51.0424 40.7023V25.2791L24.6406 9.98047L11.332 17.6852V48.2907L24.6406 56.0009ZM22.6503 21.9434L41.7284 32.9921L22.6641 44.038L22.6503 21.9434Z"
+                  fill="black"></path>
+                <path d="M85.0404 16.541L68.5765 26.9358V54.2417H57.2583V20.3532L73.6973 9.98047L85.0404 16.541Z"
+                  fill="black"></path>
+                <path
+                  d="M121.002 23.0953V11.7363H104.193L82.7544 25.2784V40.7017L104.193 54.241H121.002V42.8821H107.224L92.0823 32.9915L107.227 23.0981L121.002 23.0953Z"
+                  fill="black"></path>
+              </svg></icon-brc-logo></div>
+          <div class="hidden md:flex flex-wrap justify-end"><app-menu-links><button type="button"
+                class="btn mr-1 mb-1 max-h-[40px]"><a target="_blank"
+                  href="https://www.brcapp.com/litepaper">Litepaper</a></button></app-menu-links><!----><app-menu-links><button
+                type="button" class="btn mr-1 mb-1 max-h-[40px]"><a target="_blank"
+                  href="https://www.brcapp.com/economy">Economy</a></button></app-menu-links><!----><app-menu-links><button
+                type="button" class="btn mr-1 mb-1 max-h-[40px] btn-black"><a target="_blank"
+                  href="https://app.brcapp.com/">_ Download
+                  app</a></button></app-menu-links><!----><app-menu-links><button type="button"
+                class="btn mr-1 mb-1 max-h-[40px]"><a target="_blank"
+                  href="https://www.brcapp.com/team">Team</a></button></app-menu-links><!----><!----></div>
+          <div class="visible md:hidden flex items-center"><img src="menu-icon.svg" alt="menu"></div><!---->
+        </div>
+        <div class="mt-20 relative"><app-staking>
+            <div class="mb-24">
+              <div class="hidden md:block relative"><img src="main-graphic.png" alt="Graphic" class="w-full">
+                <div
+                  class="absolute md:bottom-[-65px] lg:bottom-0 xl:bottom-[55px] lg:max-w-[300px] xl:max-w-[390px] md:max-w-[240px]">
+                  <p class="md:text-[28px] lg:text-4xl xl:text-5xl font-extrabold">$BRCT Staking Terminal</p>
+                  <p class="mt-4 mb-4 xl:text-[22px] xl:mt-6 leading-[25px] tracking-[-0.4px]">You get 1 BRC Ticket per
+                    every 3000 $BRCT staked, per hour. One .btc domain claim costs 1000 BRC Tickets.</p>
+                </div>
+                <div
+                  class="absolute right-[-22px] bottom-[-102px] lg:bottom-[-102px] xl:bottom-[-30px] max-w-[255px] lg:max-w-[300px] xl:max-w-[410px]">
+                  <p class="md:text-[28px] lg:text-4xl xl:text-[2.8rem] font-extrabold">«BRC App Launchpad Levels»</p>
+                  <p class="mt-4 mb-4 xl:text-[22px] xl:mt-6 leading-[25px] tracking-[-0.4px]"> Level 1: 5,000 tokens (1
+                    ticket) <br> Level 2: 9,500 tokens (2 tickets) <br> Level 3: 13,500 tokens (3 tickets) <br> Level 4:
+                    25,000 tokens (7 tickets) <br> Level 5: 100,000 tokens (30 tickets) </p>
+                </div>
+              </div>
+              <div class="visible md:hidden relative"><img src="stake-claim-farm.svg" alt="Graphic"
+                  class="relative z-20"><img alt="BRC Ball" src="brc-ball.png"
+                  class="absolute right-3/4 top-1/3 h-[150px]"></div>
+              <div class="mt-20 visible md:hidden">
+                <p class="text-4xl font-extrabold">$BRCT Staking Terminal</p>
+                <p class="mt-4 mb-4">You get 1 BRC Ticket per every 3000 $BRCT staked, per hour. One .btc domain claim
+                  costs 1000 BRC Tickets.</p>
+              </div>
+              <div class="mt-10 visible md:hidden">
+                <p class="text-4xl font-extrabold">«BRC App Launchpad Levels»</p>
+                <p class="mt-4 mb-4"> Level 1: 5,000 tokens (1 ticket) <br> Level 2: 9,500 tokens (2 tickets) <br> Level
+                  3: 13,500 tokens (3 tickets) <br> Level 4: 25,000 tokens (7 tickets) <br> Level 5: 100,000 tokens (30
+                  tickets) </p>
+              </div>
+            </div>
+            <div class="font-medium text-2xl leading-none tracking-[-2%]">How much do you want to stake?</div>
+            <div class="md:w-fit">
+              <div
+                class="mt-8 bg-white border border-black rounded-[3px] h-[55px] gap-[5px] px-6 mb-2 h-fit md:flex md:justify-between">
+                <input type="number" placeholder="Enter amount to stake"
+                  class="text-xl leading-loose font-medium outline-none flex-1 max-w-full ng-untouched ng-pristine ng-valid"
+                  value="">
+                <div class="inline-block md:flex md:items-center"><app-amount-btn text="Max" class="ml-auto"><button
+                      class="border border-black rounded-full h-[26px] px-3 text-sm leading-none mr-2 mb-2 md:mb-0"> Max
+                    </button></app-amount-btn><app-amount-btn text="5000"><button
+                      class="border border-black rounded-full h-[26px] px-3 text-sm leading-none mr-2 mb-2 md:mb-0">
+                      5000
+                    </button></app-amount-btn><app-amount-btn text="10 000"><button
+                      class="border border-black rounded-full h-[26px] px-3 text-sm leading-none mr-2 mb-2 md:mb-0"> 10
+                      000
+                    </button></app-amount-btn><app-amount-btn text="25 000"><button
+                      class="border border-black rounded-full h-[26px] px-3 text-sm leading-none mr-2 mb-2 md:mb-0"> 25
+                      000
+                    </button></app-amount-btn><app-amount-btn text="100 000"><button
+                      class="border border-black rounded-full h-[26px] px-3 text-sm leading-none mr-2 mb-2 md:mb-0"> 100
+                      000
+                    </button></app-amount-btn></div>
+              </div><button
+                class="bg-black rounded-[3px] h-10 flex items-center justify-center font-medium text-xl leading-loose text-white w-full">
+                &gt;_ Connect Wallet to Stake </button><!----><!---->
+            </div><!----><!---->
+          </app-staking></div>
+      </div>
+    </div><app-revolving-text>
+      <div class="text-banner mt-[45px] md:mt-[88px] text-[36px] md:text-[96px]">
+        <div class="m-scroll"><span>Staking rewards</span><span>Staking rewards</span><span>Staking
+            rewards</span><span>Staking rewards</span></div>
+      </div>
+    </app-revolving-text>
+    <div class="container mx-auto px-6 pt-[55px] md:py-24 lg:px-22 relative">
+      <div class="px-6 border-x border-black">
+        <div class="lg:grid lg:grid-cols-4 lg:gap-10 mb-16">
+          <div class="border border-black grid place-content-center mb-4 p-7">
+            <div class="text-center text-4xl">0 <span class="text-[20px] font-[300]">$BRCT</span></div>
+            <div class="text-center">Your stake</div>
+          </div>
+          <div class="border border-black grid place-content-center mb-4 p-7">
+            <div class="text-center text-4xl"></div>
+            <div class="text-center">Your BRC Tickets Per Day</div>
+          </div>
+          <div class="border border-black grid place-content-center mb-4 p-7">
+            <div class="text-center text-4xl"> <span class="text-[20px] font-[300]">$BRCT</span></div>
+            <div class="text-center">Total BRCT Staked</div>
+          </div>
+          <div class="border border-black grid place-content-center mb-4 p-7">
+            <div class="text-center text-4xl countdown">25<span>m</span> 17<span>s</span></div>
+            <div class="text-center">Until next raffle</div>
+          </div>
+        </div>
+        <div class="lg:grid lg:grid-cols-4 lg:gap-10 h-fit">
+          <div class="grid grid-rows-2 place-content-center"><img src="coin.png" alt="Coin" class="mx-auto">
+            <div class="text-center text-2xl flex items-center">Stake More $BRCT</div>
+          </div>
+          <div class="grid grid-rows-2 place-content-center"><img src="coin.png" alt="Coin" class="mx-auto">
+            <div class="text-center text-2xl flex items-center">Increase Level in Launchpad IDOs</div>
+          </div>
+          <div class="grid grid-rows-2 place-content-center"><img src="coin.png" alt="Coin" class="mx-auto">
+            <div class="text-center text-2xl flex items-center">Collect .btc domains</div>
+          </div>
+          <div class="grid grid-rows-2 place-content-center"><img src="coin.png" alt="Coin" class="mx-auto">
+            <div class="text-center text-2xl flex items-center">Trade .btc domains</div>
+          </div>
+        </div>
+        <div class="text-5xl lg:text-9xl text-center font-bold px-2 pt-[60px] lg:pt-[200px]">How BRC App Staking Works
+        </div>
+      </div><img src="arrow.png" alt="arrow" class="absolute left-[9px]"><img src="arrow.png" alt="arrow"
+        class="absolute right-[9px]">
+      <div class="lg:grid lg:grid-cols-3 lg:gap-10 mt-40">
+        <div class="mb-10"><img src="pucker.png" alt="Icon">
+          <div class="text-3xl font-medium mb-6 pb-6 pt-2.5 border-b-2 flex items-center min-h-[108px]">Stake $BRCT, get
+            BRC Tickets </div>
+          <div class="text-xl capitalize opacity-60">3000 $BRCT staked gives 1 BRCT Ticket per hour. One .btc domain
+            claim costs 1000 BRC Tickets. </div>
+        </div>
+        <div class="mb-10"><img src="pucker.png" alt="Icon">
+          <div class="text-3xl font-medium mb-6 pb-6 pt-2.5 border-b-2 flex items-center min-h-[108px]">1000 Tickets = 1
+            Unique Domain </div>
+          <div class="text-xl capitalize opacity-60">Web3 domains on Bitcoin is the debut domain market created by BRC
+            App. After the success of Ethereum domains, Bitcoin domains are an emerging class looking to take Ethereum's
+            throne. </div>
+        </div>
+        <div class="mb-10"><img src="pucker.png" alt="Icon">
+          <div class="text-3xl font-medium mb-6 pb-6 pt-2.5 border-b-2 min-h-[108px]">Unstake Anytime</div>
+          <div class="text-xl capitalize opacity-60">You can exit staking anytime - there's no lock. Once you unstake,
+            your tokens will enter a 10 cooldown period and will be released within 10 days. If you want to exit early,
+            you can choose to pay a 20% premium and get tokens back early. </div>
+        </div>
+      </div>
+      <div class="grid grid-rows-1 lg:grid-cols-3 gap-10 place-content-center mt-[70px] mb-[40px]">
+        <div class="text-[40px]">Become BRC App Stakers</div>
+        <div class="flex items-center">
+          <hr class="border border-black w-full">
+        </div>
+        <div class="flex items-center"><button type="button" class="btn btn-black xl w-full xl:w-[60%] max-h-[60px]"><a
+              href="#top">&gt;_ Stake BRCT</a></button></div>
+      </div>
+    </div>
+    <div class="container mx-auto px-6 py-20 lg:px-22">
+      <div class="grid grid-rows-1 lg:grid-cols-2 flex justify-between border-b pb-[25px] lg:pb-[42px]">
+        <div class="flex flex-wrap"><a href="https://www.brcapp.com/litepaper" target="_blank"
+            class="mr-3">Litepaper</a><a href="https://www.brcapp.com/team" target="_blank" class="mr-3">Team</a></div>
+        <div class="flex lg:justify-end mt-[20px] lg:mt-0"><a href="https://twitter.com/BRCapp" target="_blank"
+            class="mr-4"><img src="x.svg" alt="X"></a><a href="https://t.me/BRCappChat" target="_blank"
+            class="mr-4"><img src="telegram.svg" alt="Telegram"></a></div>
+      </div>
+      <div class="grid grid-rows-1 lg:grid-cols-2 flex justify-between pt-[25px] lg:pt-[42px] text-[14px]">
+        <div>© 2023 brcapp.com All rights reserved.</div>
+        <div class="flex lg:justify-end"><a href="https://www.brcapp.com/terms-of-service" target="_blank"
+            class="mr-3">Terms of Service</a><a href="https://www.brcapp.com/privacy-policy" target="_blank"
+            class="mr-3">Privacy Policy</a></div>
+      </div>
+    </div>
+  </app-root>
+
+
+  <onboard-v2 style="all: initial;"
+    data-scrapbook-shadowdom="
+
+  <style>
+    :host {
+          /* COLORS */
+          --white: white;
+          --black: black;
+          --primary-1: #2F80ED;
+          --primary-100: #eff1fc;
+          --primary-200: #d0d4f7;
+          --primary-300: #b1b8f2;
+          --primary-400: #929bed;
+          --primary-500: #6370e5;
+          --primary-600: #454ea0;
+          --primary-700: #323873;
+          --gray-100: #ebebed;
+          --gray-200: #c2c4c9;
+          --gray-300: #999ca5;
+          --gray-400: #707481;
+          --gray-500: #33394b;
+          --gray-600: #242835;
+          --gray-700: #1a1d26;
+          --success-100: #d1fae3;
+          --success-200: #baf7d5;
+          --success-300: #a4f4c6;
+          --success-400: #8df2b8;
+          --success-500: #5aec99;
+          --success-600: #18ce66;
+          --success-700: #129b4d;
+          --danger-100: #ffe5e6;
+          --danger-200: #ffcccc;
+          --danger-300: #ffb3b3;
+          --danger-400: #ff8080;
+          --danger-500: #ff4f4f;
+          --danger-600: #cc0000;
+          --danger-700: #660000;
+          --warning-100: #ffefcc;
+          --warning-200: #ffe7b3;
+          --warning-300: #ffd780;
+          --warning-400: #ffc74c;
+          --warning-500: #ffaf00;
+          --warning-600: #cc8c00;
+          --warning-700: #664600;
+
+          /* FONTS */
+          --font-family-normal: var(--w3o-font-family, Inter, sans-serif);
+
+          --font-size-1: 3rem;
+          --font-size-2: 2.25rem;
+          --font-size-3: 1.5rem;
+          --font-size-4: 1.25rem;
+          --font-size-5: 1rem;
+          --font-size-6: .875rem;
+          --font-size-7: .75rem;
+
+          --font-line-height-1: 24px;
+          --font-line-height-2: 20px;
+          --font-line-height-3: 16px;
+          --font-line-height-4: 12px;
+
+          /* SPACING */
+          --spacing-1: 3rem;
+          --spacing-2: 2rem;
+          --spacing-3: 1.5rem;
+          --spacing-4: 1rem;
+          --spacing-5: 0.5rem;
+          --spacing-6: 0.25rem;
+          --spacing-7: 0.125rem;
+
+          /* BORDER RADIUS */
+          --border-radius-1: 24px;
+          --border-radius-2: 20px;
+          --border-radius-3: 16px;
+          --border-radius-4: 12px;
+          --border-radius-5: 8px;
+
+          /* SHADOWS */
+          --shadow-0: none;
+          --shadow-1: 0px 4px 12px rgba(0, 0, 0, 0.1);
+          --shadow-2: inset 0px -1px 0px rgba(0, 0, 0, 0.1);
+          --shadow-3: 0px 4px 16px rgba(0, 0, 0, 0.2);
+
+          /* MODAL POSITIONING */
+          --modal-z-index: 10;
+          --modal-top: unset;
+          --modal-right: unset;
+          --modal-bottom: unset;
+          --modal-left: unset;
+
+          /* MODAL STYLES */
+          --modal-backdrop: rgba(0, 0, 0, 0.6);
+
+        }
+      </style>
+    <style id=&quot;svelte-g9s19b&quot;>.flex{display:flex}.inline-flex{display:inline-flex}.flex-column{flex-direction:column}.items-center{align-items:center}.items-end{align-items:flex-end}.items-start{align-items:flex-start}.justify-center{justify-content:center}.justify-start{justify-content:flex-start}.justify-between{justify-content:space-between}.justify-end{justify-content:flex-end}.justify-around{justify-content:space-around}.relative{position:relative}.absolute{position:absolute}.fixed{position:fixed}.pointer{cursor:pointer}.shadow-1{box-shadow:var(--onboard-shadow-1, var(--shadow-1))}.w-100{width:100%}*{box-sizing:border-box}input{background:var(--onboard-white, var(--white))}input{width:100%;padding:0.5rem 1rem;outline:2px solid var(--onboard-gray-200, var(--gray-200));border:none;border-radius:8px;font-size:1rem;line-height:1.5;color:var(--onboard-gray-600, var(--gray-600));transition:all 200ms ease-in-out}input[type='checkbox']{-webkit-appearance:none;width:auto;background:var(--onboard-white, var(--white));outline:1px solid var(--onboard-gray-300, var(--gray-300));border:none;padding:0.5em;border-radius:3px;display:flex;justify-content:center;align-items:center;position:relative;cursor:pointer}input[type='checkbox']:hover{border-color:var(
+      --onboard-checkbox-background,
+      var(--onboard-primary-500, var(--primary-500))
+    )}input[type='checkbox']:checked{background:var(
+      --onboard-checkbox-background,
+      var(--onboard-primary-500, var(--primary-500))
+    );border-color:var(
+      --onboard-checkbox-background,
+      var(--onboard-primary-500, var(--primary-500))
+    );color:var(--onboard-checkbox-color, var(--onboard-white, var(--white)))}input[type='checkbox']:checked:after{content:url(&quot;&quot;);font-size:12px;position:absolute;color:var(--onboard-checkbox-color, var(--onboard-white, var(--white)))}input:hover{border-color:var(
+      --onboard-checkbox-color,
+      var(--onboard-white, var(--white))
+    )}input:focus{border-color:var(--onboard-primary-500, var(--primary-500));box-shadow:0 0 1px 1px
+      var(
+        --onboard-checkbox-background,
+        var(--onboard-primary-500, var(--primary-500))
+      );box-shadow:0 0 0 1px -moz-mac-focusring}input:disabled, textarea:disabled, select:disabled{background:var(--gray-100)}input::-moz-focus-inner{outline:0;padding:0;margin-top:-2px;margin-bottom:-2px}a{color:var(
+      --onboard-link-color,
+      var(--onboard-primary-500, var(--primary-500))
+    );text-decoration:none}a:hover{text-decoration:underline}button{display:flex;align-items:center;justify-content:center;padding:calc(var(--onboard-spacing-4, var(--spacing-4)) - 1px);border-radius:24px;cursor:pointer;font:inherit;border:none;transition:background-color 150ms ease-in-out, color 150ms ease-in-out}.onboard-button-primary{background:var(--onboard-white, var(--white));padding:calc(var(--onboard-spacing-5, var(--spacing-5)) - 1px)
+      calc(var(--onboard-spacing-4, var(--spacing-4)) - 1px);color:var(--onboard-gray-500, var(--gray-500));font-size:var(--onboard-font-size-6, var(--font-size-6));line-height:var(--onboard-font-line-height-3, var(--font-line-height-3));border:1px solid var(--onboard-gray-500, var(--gray-500));font-weight:600}.button-neutral-solid{width:100%;border-radius:8px;background:var(--onboard-gray-500, var(--gray-500));color:var(--onboard-white, var(--white));line-height:var(--onboard-font-line-height-3, var(--font-line-height-3))}.button-neutral-solid-b{width:100%;background:var(--onboard-gray-100, var(--gray-100));color:var(--onboard-gray-500, var(--gray-500));line-height:var(--onboard-font-line-height-3, var(--font-line-height-3))}button.rounded{border-radius:24px}.button-neutral-solid:hover{background:var(--onboard-gray-700, var(--gray-700))}.button-neutral-solid-b:hover{background:var(--onboard-gray-200, var(--gray-200))}.button-neutral-solid:active{color:var(--onboard-gray-300, var(--gray-300))}.button-neutral-solid-b:active{color:var(--onboard-gray-600, var(--gray-600));background:var(--onboard-gray-300, var(--gray-300))}.container.svelte-g9s19b{padding:16px;font-family:var(--onboard-font-family-normal, var(--font-family-normal));pointer-events:none;touch-action:none;width:100%}.z-indexed.svelte-g9s19b{z-index:var(--account-center-z-index)}@media all and (min-width: 428px){.container.svelte-g9s19b{max-width:348px}}</style><section class=&quot;svelte-baitaa fixed&quot; style=&quot;&quot;><div class=&quot;background flex items-center justify-center relative svelte-baitaa full-screen-background&quot;><div class=&quot;modal-container-mobile modal-position flex svelte-baitaa absolute&quot;><div class=&quot;flex relative max-height svelte-baitaa&quot;><div class=&quot;modal-overflow modal-styling relative flex justify-center svelte-baitaa&quot; style=&quot;&quot;><div class=&quot;modal relative svelte-baitaa&quot;><div class=&quot;container svelte-b3j15j&quot;><div class=&quot;sidebar svelte-obaru3&quot;><div class=&quot;inner-container svelte-obaru3&quot;><div class=&quot;icon-container svelte-obaru3&quot;><img src=&quot;logo.svg&quot; alt=&quot;logo&quot; class=&quot;svelte-obaru3&quot;></div>  <div class=&quot;subheading svelte-obaru3&quot;>Connect your wallet</div> <div class=&quot;description svelte-obaru3&quot;>Connecting your wallet is like “logging in” to Web3. Select your wallet from the options to get started.</div> <a href=&quot;https://ethereum.org/en/wallets/find-wallet/#main-content&quot; target=&quot;_blank&quot; rel=&quot;noreferrer noopener&quot; class=&quot;no-link svelte-obaru3&quot;>I don't have a wallet <div class=&quot;info-icon svelte-obaru3&quot;>
+  <svg width=&quot;100%&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;>
+    <path d=&quot;M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM13 17H11V11H13V17ZM13 9H11V7H13V9Z&quot; fill=&quot;currentColor&quot;></path>
+  </svg>
+</div></a> </div> <div class=&quot;indicators flex items-center svelte-obaru3&quot;><div class=&quot;indicator relative svelte-obaru3 on&quot;></div> <div class=&quot;join relative svelte-obaru3&quot; style=&quot;right: 2px; width: 82px;&quot;></div> <div class=&quot;indicator relative svelte-obaru3&quot; style=&quot;right: 4px;&quot;></div> <div class=&quot;join relative svelte-obaru3&quot; style=&quot;right: 6px; width: 81px;&quot;></div> <div style=&quot;right: 8px;&quot; class=&quot;indicator relative svelte-obaru3&quot;></div></div> <div>
+<svg width=&quot;152&quot; height=&quot;16&quot; viewBox=&quot;0 0 152 16&quot; fill=&quot;none&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;>
+<path d=&quot;M4.03641 6.252C3.23241 6.252 2.41641 6.636 2.04441 7.272V6.396H1.00041V14.724H2.04441V11.124C2.41641 11.784 3.20841 12.144 4.04841 12.144C5.58441 12.144 6.84441 10.98 6.84441 9.204C6.84441 7.44 5.57241 6.252 4.03641 6.252ZM3.94041 11.16C3.02841 11.16 2.04441 10.428 2.04441 9.216C2.04441 8.016 2.94441 7.236 3.94041 7.236C4.97241 7.236 5.78841 8.1 5.78841 9.216C5.78841 10.344 4.97241 11.16 3.94041 11.16ZM10.8452 12.144C12.4412 12.144 13.7852 10.968 13.7852 9.192C13.7852 7.416 12.4412 6.252 10.8452 6.252C9.24919 6.252 7.91719 7.416 7.91719 9.192C7.91719 10.968 9.24919 12.144 10.8452 12.144ZM10.8452 11.16C9.82519 11.16 8.97319 10.356 8.97319 9.192C8.97319 8.04 9.82519 7.236 10.8452 7.236C11.8772 7.236 12.7412 8.04 12.7412 9.192C12.7412 10.356 11.8772 11.16 10.8452 11.16ZM22.2729 6.396L20.8449 10.38L19.4049 6.396H18.3849L16.9569 10.38L15.5289 6.396H14.4009L16.5369 12H17.4009L18.8889 7.836L20.4369 12H21.3129L23.4009 6.396H22.2729ZM29.6948 9.18C29.6948 7.404 28.5068 6.252 26.9108 6.252C25.3148 6.252 24.0308 7.404 24.0308 9.18C24.0308 10.956 25.3148 12.144 26.9108 12.144C27.9908 12.144 28.9988 11.616 29.4788 10.644L28.5788 10.284C28.2548 10.848 27.6308 11.16 26.9468 11.16C25.9868 11.16 25.2668 10.644 25.1108 9.648H29.6708C29.6828 9.492 29.6948 9.336 29.6948 9.18ZM25.1228 8.748C25.2908 7.74 25.9628 7.236 26.9108 7.236C27.8348 7.236 28.5188 7.788 28.6508 8.748H25.1228ZM33.7456 6.252C33.0016 6.252 32.4616 6.684 32.1736 7.668V6.396H31.1176V12H32.1736V9.948C32.1736 8.472 32.6176 7.26 33.7336 7.26C33.9496 7.26 34.2496 7.308 34.5496 7.452L34.7176 6.468C34.5496 6.36 34.1416 6.252 33.7456 6.252ZM40.8627 9.18C40.8627 7.404 39.6747 6.252 38.0787 6.252C36.4827 6.252 35.1987 7.404 35.1987 9.18C35.1987 10.956 36.4827 12.144 38.0787 12.144C39.1587 12.144 40.1667 11.616 40.6467 10.644L39.7467 10.284C39.4227 10.848 38.7987 11.16 38.1147 11.16C37.1547 11.16 36.4347 10.644 36.2787 9.648H40.8387C40.8507 9.492 40.8627 9.336 40.8627 9.18ZM36.2907 8.748C36.4587 7.74 37.1307 7.236 38.0787 7.236C39.0027 7.236 39.6867 7.788 39.8187 8.748H36.2907ZM46.7136 3.348V7.272C46.3416 6.612 45.5496 6.252 44.7096 6.252C43.1736 6.252 41.9136 7.416 41.9136 9.192C41.9136 10.956 43.1856 12.144 44.7216 12.144C45.5256 12.144 46.3416 11.76 46.7136 11.124V12H47.7576V3.348H46.7136ZM44.8056 11.16C43.7856 11.16 42.9696 10.296 42.9696 9.18C42.9696 8.052 43.7856 7.236 44.8056 7.236C45.7296 7.236 46.7136 7.968 46.7136 9.18C46.7136 10.38 45.8136 11.16 44.8056 11.16ZM55.6695 6.252C54.8295 6.252 54.0375 6.612 53.6655 7.272V3.348H52.6215V12H53.6655V11.124C54.0375 11.76 54.8535 12.144 55.6575 12.144C57.1935 12.144 58.4655 10.956 58.4655 9.192C58.4655 7.416 57.2055 6.252 55.6695 6.252ZM55.5615 11.16C54.5655 11.16 53.6655 10.38 53.6655 9.18C53.6655 7.968 54.6495 7.236 55.5615 7.236C56.5935 7.236 57.4095 8.052 57.4095 9.18C57.4095 10.296 56.5935 11.16 55.5615 11.16ZM63.6097 6.396L61.8937 10.524L60.2017 6.396H59.0737L61.3297 11.832L60.1537 14.724H61.2577L64.7377 6.396H63.6097Z&quot; fill=&quot;var(--w3o-text-color, #707481)&quot;></path>
+<g clip-path=&quot;url(#clip0_13558_103869)&quot;>
+<path d=&quot;M143.502 11.0888L141.863 8.24889H145.142L146.782 11.0888H143.502Z&quot; fill=&quot;currentColor&quot;></path>
+<path d=&quot;M145.142 8.24887H141.863L143.502 5.40895H146.782L145.142 8.24887Z&quot; fill=&quot;url(#paint0_linear_13558_103869)&quot;></path>
+<path d=&quot;M148.421 8.24888L146.782 5.40896H143.502L141.863 2.56903H148.421L151.701 8.24888H148.421Z&quot; fill=&quot;currentColor&quot;></path>
+<path d=&quot;M148.421 13.9287H141.863L143.502 11.0888H146.782L148.421 8.24889H151.701L148.421 13.9287Z&quot; fill=&quot;url(#paint1_linear_13558_103869)&quot;></path>
+<path d=&quot;M76.4774 8.89232C76.4774 10.9327 74.9716 12.5077 73.1366 12.5077C72.1369 12.5077 71.4106 12.1378 70.9181 11.508V12.316H69.1513V2.71994L70.9181 2.17606V6.27771C71.4106 5.64894 72.1369 5.27797 73.1366 5.27797C74.9716 5.27797 76.4774 6.85198 76.4774 8.89232ZM74.7106 8.89232C74.7106 7.73959 73.9037 6.96201 72.8076 6.96201C71.7114 6.96201 70.9213 7.74273 70.9213 8.89232C70.9213 10.0419 71.7292 10.8237 72.8076 10.8237C73.8859 10.8237 74.7106 10.043 74.7106 8.89232Z&quot; fill=&quot;currentColor&quot;></path>
+<path d=&quot;M77.2718 2.71994L79.0376 2.17606V12.316H77.2718V2.71994Z&quot; fill=&quot;currentColor&quot;></path>
+<path d=&quot;M79.8183 8.89232C79.8171 8.17544 80.0286 7.47431 80.4261 6.87774C80.8236 6.28117 81.3893 5.816 82.0514 5.54113C82.7135 5.26627 83.4422 5.19408 84.1454 5.33371C84.8485 5.47333 85.4944 5.8185 86.0013 6.32549C86.5081 6.83247 86.8531 7.47847 86.9925 8.18166C87.1319 8.88486 87.0595 9.61361 86.7845 10.2756C86.5094 10.9376 86.0441 11.5031 85.4474 11.9005C84.8507 12.2978 84.1495 12.5092 83.4326 12.5077C82.9565 12.5128 82.4842 12.4227 82.0433 12.2428C81.6024 12.0629 81.2019 11.7967 80.8653 11.46C80.5286 11.1232 80.2626 10.7227 80.0828 10.2817C79.903 9.84083 79.8131 9.36845 79.8183 8.89232ZM85.2948 8.89232C85.2948 7.78359 84.4869 7.00602 83.4326 7.00602C82.3784 7.00602 81.5841 7.78674 81.5841 8.89232C81.5841 9.9979 82.392 10.7786 83.4326 10.7786C84.4733 10.7786 85.2948 10.0021 85.2948 8.89232Z&quot; fill=&quot;currentColor&quot;></path>
+<path d=&quot;M87.7313 8.89233C87.7313 6.85198 89.2645 5.27797 91.3457 5.27797C92.6881 5.27797 93.8513 5.98952 94.413 7.04375L92.8935 7.93451C92.6189 7.37281 92.03 7.01651 91.3321 7.01651C90.2778 7.01651 89.4971 7.79723 89.4971 8.89233C89.4971 9.98743 90.2778 10.7545 91.3321 10.7545C92.0447 10.7545 92.6326 10.4129 92.904 9.8512L94.4371 10.7273C94.1281 11.2741 93.6779 11.7279 93.1335 12.0413C92.5891 12.3547 91.9706 12.5161 91.3425 12.5088C89.2645 12.5077 87.7313 10.9327 87.7313 8.89233Z&quot; fill=&quot;currentColor&quot;></path>
+<path d=&quot;M99.5123 12.316L97.0203 9.20776V12.316H95.2534V2.71994L97.0203 2.17606V8.48153L99.374 5.46974H101.482L98.7316 8.85145L101.566 12.316H99.5123Z&quot; fill=&quot;currentColor&quot;></path>
+<path d=&quot;M108.623 8.11161V12.316H106.856V8.33377C106.856 7.40215 106.296 6.92324 105.501 6.92324C104.639 6.92324 103.994 7.4294 103.994 8.62091V12.316H102.229V5.46974H103.994V6.23579C104.405 5.6196 105.118 5.27797 106.035 5.27797C107.486 5.27797 108.623 6.29657 108.623 8.11161Z&quot; fill=&quot;currentColor&quot;></path>
+<path d=&quot;M116.74 5.46974V12.316H114.975V11.508C114.481 12.1242 113.742 12.5077 112.743 12.5077C110.921 12.5077 109.415 10.9358 109.415 8.89233C109.415 6.84884 110.921 5.27797 112.743 5.27797C113.742 5.27797 114.481 5.66152 114.975 6.27771V5.46974H116.74ZM114.975 8.89233C114.975 7.73959 114.167 6.96201 113.071 6.96201C111.974 6.96201 111.184 7.74273 111.184 8.89233C111.184 10.0419 111.992 10.8237 113.071 10.8237C114.149 10.8237 114.975 10.043 114.975 8.89233Z&quot; fill=&quot;currentColor&quot;></path>
+<path d=&quot;M121.344 7.16742V5.46975H119.796V3.45665L118.027 4.00053V10.0157C118.027 11.8643 118.866 12.5895 121.342 12.3212V10.7137C120.329 10.7692 119.794 10.7545 119.794 10.0157V7.16742H121.344Z&quot; fill=&quot;currentColor&quot;></path>
+<path d=&quot;M122.582 5.46974H124.347V12.316H122.582V5.46974Z&quot; fill=&quot;currentColor&quot;></path>
+<path d=&quot;M132.293 5.46974L129.691 12.316H127.678L125.077 5.46974H127.021L128.678 10.262L130.348 5.46974H132.293Z&quot; fill=&quot;currentColor&quot;></path>
+<path d=&quot;M136.073 10.9075C136.757 10.9075 137.305 10.6204 137.607 10.2232L139.03 11.0448C138.387 11.9754 137.36 12.5119 136.046 12.5119C133.74 12.5119 132.294 10.94 132.294 8.89652C132.294 6.85303 133.761 5.28217 135.908 5.28217C137.935 5.28217 139.373 6.88447 139.373 8.89652C139.37 9.13886 139.346 9.38049 139.301 9.61856H134.143C134.389 10.5219 135.142 10.9075 136.073 10.9075ZM137.607 8.25099C137.387 7.26487 136.648 6.8677 135.908 6.8677C134.965 6.8677 134.321 7.37491 134.114 8.25099H137.607Z&quot; fill=&quot;currentColor&quot;></path>
+</g>
+<defs>
+<linearGradient id=&quot;paint0_linear_13558_103869&quot; x1=&quot;141.863&quot; y1=&quot;6.82891&quot; x2=&quot;146.782&quot; y2=&quot;6.82891&quot; gradientUnits=&quot;userSpaceOnUse&quot;>
+<stop stop-color=&quot;#55CCFE&quot;></stop>
+<stop offset=&quot;1&quot; stop-color=&quot;#5E93EF&quot;></stop>
+</linearGradient>
+<linearGradient id=&quot;paint1_linear_13558_103869&quot; x1=&quot;6973.93&quot; y1=&quot;500.862&quot; x2=&quot;7897.53&quot; y2=&quot;500.862&quot; gradientUnits=&quot;userSpaceOnUse&quot;>
+<stop stop-color=&quot;#55CCFE&quot;></stop>
+<stop offset=&quot;1&quot; stop-color=&quot;#5E93EF&quot;></stop>
+</linearGradient>
+<clipPath id=&quot;clip0_13558_103869&quot;>
+<rect width=&quot;82.8232&quot; height=&quot;12&quot; fill=&quot;white&quot; transform=&quot;translate(69.0884 2)&quot;></rect>
+</clipPath>
+</defs>
+</svg>
+</div></div> <div class=&quot;content flex flex-column svelte-b3j15j&quot;><div class=&quot;header relative flex items-center svelte-b3j15j&quot;><div class=&quot;header-heading svelte-b3j15j&quot;>Available Wallets (2)</div></div> <div class=&quot;button-container absolute svelte-b3j15j&quot;><div class=&quot;close-button svelte-1ubf722&quot;><div class=&quot;svg-box svelte-1ubf722&quot;>
+  <svg width=&quot;100%&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;>
+    <path d=&quot;M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41Z&quot; fill=&quot;currentColor&quot;></path>
+  </svg>
+</div></div></div> <div class=&quot;scroll-container svelte-b3j15j&quot;> <div class=&quot;svelte-b3j15j&quot;><div class=&quot;outer-container&quot;> <div class=&quot;wallets-container svelte-kpc6js&quot;><div class=&quot;wallet-button-container svelte-1vlog3j&quot;><button class=&quot;wallet-button-styling svelte-1vlog3j&quot;><div class=&quot;wallet-button-container-inner svelte-1vlog3j&quot;><div class=&quot;relative svelte-i129jl border-custom background-transparent&quot; style=&quot;; padding: 8.333333333333334px; width: 48px; height: 48px; border-radius: 12px; color: black;&quot;><div class=&quot;icon flex justify-center items-center svelte-i129jl&quot; style=&quot;&quot;><!--?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?-->
+<svg width=&quot;100%&quot; height=&quot;100%&quot; version=&quot;1.1&quot; id=&quot;Layer_1&quot; xmlns:ev=&quot;http://www.w3.org/2001/xml-events&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; xmlns:xlink=&quot;http://www.w3.org/1999/xlink&quot; x=&quot;0px&quot; y=&quot;0px&quot; viewBox=&quot;0 0 318.6 318.6&quot; style=&quot;enable-background:new 0 0 318.6 318.6;&quot; xml:space=&quot;preserve&quot;>
+<style type=&quot;text/css&quot;>
+	.st0{fill:#E2761B;stroke:#E2761B;stroke-linecap:round;stroke-linejoin:round;}
+	.st1{fill:#E4761B;stroke:#E4761B;stroke-linecap:round;stroke-linejoin:round;}
+	.st2{fill:#D7C1B3;stroke:#D7C1B3;stroke-linecap:round;stroke-linejoin:round;}
+	.st3{fill:#233447;stroke:#233447;stroke-linecap:round;stroke-linejoin:round;}
+	.st4{fill:#CD6116;stroke:#CD6116;stroke-linecap:round;stroke-linejoin:round;}
+	.st5{fill:#E4751F;stroke:#E4751F;stroke-linecap:round;stroke-linejoin:round;}
+	.st6{fill:#F6851B;stroke:#F6851B;stroke-linecap:round;stroke-linejoin:round;}
+	.st7{fill:#C0AD9E;stroke:#C0AD9E;stroke-linecap:round;stroke-linejoin:round;}
+	.st8{fill:#161616;stroke:#161616;stroke-linecap:round;stroke-linejoin:round;}
+	.st9{fill:#763D16;stroke:#763D16;stroke-linecap:round;stroke-linejoin:round;}
+</style>
+<polygon class=&quot;st0&quot; points=&quot;274.1,35.5 174.6,109.4 193,65.8 &quot;></polygon>
+<g>
+	<polygon class=&quot;st1&quot; points=&quot;44.4,35.5 143.1,110.1 125.6,65.8 	&quot;></polygon>
+	<polygon class=&quot;st1&quot; points=&quot;238.3,206.8 211.8,247.4 268.5,263 284.8,207.7 	&quot;></polygon>
+	<polygon class=&quot;st1&quot; points=&quot;33.9,207.7 50.1,263 106.8,247.4 80.3,206.8 	&quot;></polygon>
+	<polygon class=&quot;st1&quot; points=&quot;103.6,138.2 87.8,162.1 144.1,164.6 142.1,104.1 	&quot;></polygon>
+	<polygon class=&quot;st1&quot; points=&quot;214.9,138.2 175.9,103.4 174.6,164.6 230.8,162.1 	&quot;></polygon>
+	<polygon class=&quot;st1&quot; points=&quot;106.8,247.4 140.6,230.9 111.4,208.1 	&quot;></polygon>
+	<polygon class=&quot;st1&quot; points=&quot;177.9,230.9 211.8,247.4 207.1,208.1 	&quot;></polygon>
+</g>
+<g>
+	<polygon class=&quot;st2&quot; points=&quot;211.8,247.4 177.9,230.9 180.6,253 180.3,262.3 	&quot;></polygon>
+	<polygon class=&quot;st2&quot; points=&quot;106.8,247.4 138.3,262.3 138.1,253 140.6,230.9 	&quot;></polygon>
+</g>
+<polygon class=&quot;st3&quot; points=&quot;138.8,193.5 110.6,185.2 130.5,176.1 &quot;></polygon>
+<polygon class=&quot;st3&quot; points=&quot;179.7,193.5 188,176.1 208,185.2 &quot;></polygon>
+<g>
+	<polygon class=&quot;st4&quot; points=&quot;106.8,247.4 111.6,206.8 80.3,207.7 	&quot;></polygon>
+	<polygon class=&quot;st4&quot; points=&quot;207,206.8 211.8,247.4 238.3,207.7 	&quot;></polygon>
+	<polygon class=&quot;st4&quot; points=&quot;230.8,162.1 174.6,164.6 179.8,193.5 188.1,176.1 208.1,185.2 	&quot;></polygon>
+	<polygon class=&quot;st4&quot; points=&quot;110.6,185.2 130.6,176.1 138.8,193.5 144.1,164.6 87.8,162.1 	&quot;></polygon>
+</g>
+<g>
+	<polygon class=&quot;st5&quot; points=&quot;87.8,162.1 111.4,208.1 110.6,185.2 	&quot;></polygon>
+	<polygon class=&quot;st5&quot; points=&quot;208.1,185.2 207.1,208.1 230.8,162.1 	&quot;></polygon>
+	<polygon class=&quot;st5&quot; points=&quot;144.1,164.6 138.8,193.5 145.4,227.6 146.9,182.7 	&quot;></polygon>
+	<polygon class=&quot;st5&quot; points=&quot;174.6,164.6 171.9,182.6 173.1,227.6 179.8,193.5 	&quot;></polygon>
+</g>
+<polygon class=&quot;st6&quot; points=&quot;179.8,193.5 173.1,227.6 177.9,230.9 207.1,208.1 208.1,185.2 &quot;></polygon>
+<polygon class=&quot;st6&quot; points=&quot;110.6,185.2 111.4,208.1 140.6,230.9 145.4,227.6 138.8,193.5 &quot;></polygon>
+<polygon class=&quot;st7&quot; points=&quot;180.3,262.3 180.6,253 178.1,250.8 140.4,250.8 138.1,253 138.3,262.3 106.8,247.4 117.8,256.4 
+	140.1,271.9 178.4,271.9 200.8,256.4 211.8,247.4 &quot;></polygon>
+<polygon class=&quot;st8&quot; points=&quot;177.9,230.9 173.1,227.6 145.4,227.6 140.6,230.9 138.1,253 140.4,250.8 178.1,250.8 180.6,253 &quot;></polygon>
+<g>
+	<polygon class=&quot;st9&quot; points=&quot;278.3,114.2 286.8,73.4 274.1,35.5 177.9,106.9 214.9,138.2 267.2,153.5 278.8,140 273.8,136.4 
+		281.8,129.1 275.6,124.3 283.6,118.2 	&quot;></polygon>
+	<polygon class=&quot;st9&quot; points=&quot;31.8,73.4 40.3,114.2 34.9,118.2 42.9,124.3 36.8,129.1 44.8,136.4 39.8,140 51.3,153.5 103.6,138.2 
+		140.6,106.9 44.4,35.5 	&quot;></polygon>
+</g>
+<polygon class=&quot;st6&quot; points=&quot;267.2,153.5 214.9,138.2 230.8,162.1 207.1,208.1 238.3,207.7 284.8,207.7 &quot;></polygon>
+<polygon class=&quot;st6&quot; points=&quot;103.6,138.2 51.3,153.5 33.9,207.7 80.3,207.7 111.4,208.1 87.8,162.1 &quot;></polygon>
+<polygon class=&quot;st6&quot; points=&quot;174.6,164.6 177.9,106.9 193.1,65.8 125.6,65.8 140.6,106.9 144.1,164.6 145.3,182.8 145.4,227.6 
+	173.1,227.6 173.3,182.8 &quot;></polygon>
+</svg>
+</div>  </div> <div class=&quot;name svelte-1vlog3j&quot;>MetaMask</div> </div></button></div><div class=&quot;wallet-button-container svelte-1vlog3j&quot;><button class=&quot;wallet-button-styling svelte-1vlog3j&quot;><div class=&quot;wallet-button-container-inner svelte-1vlog3j&quot;><div class=&quot;relative svelte-i129jl border-custom background-transparent&quot; style=&quot;; padding: 8.333333333333334px; width: 48px; height: 48px; border-radius: 12px; color: black;&quot;><div class=&quot;icon flex justify-center items-center svelte-i129jl&quot; style=&quot;&quot;>
+  <svg viewBox=&quot;0 0 40 25&quot; width=&quot;100%&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;>
+  <path d=&quot;m8.19180572 4.83416816c6.52149658-6.38508884 17.09493158-6.38508884 23.61642788 0l.7848727.76845565c.3260748.31925442.3260748.83686816 0 1.15612272l-2.6848927 2.62873374c-.1630375.15962734-.4273733.15962734-.5904108 0l-1.0800779-1.05748639c-4.5495589-4.45439756-11.9258514-4.45439756-16.4754105 0l-1.1566741 1.13248068c-.1630376.15962721-.4273735.15962721-.5904108 0l-2.68489263-2.62873375c-.32607483-.31925456-.32607483-.83686829 0-1.15612272zm29.16903948 5.43649934 2.3895596 2.3395862c.3260732.319253.3260751.8368636.0000041 1.1561187l-10.7746894 10.5494845c-.3260726.3192568-.8547443.3192604-1.1808214.0000083-.0000013-.0000013-.0000029-.0000029-.0000042-.0000043l-7.6472191-7.4872762c-.0815187-.0798136-.2136867-.0798136-.2952053 0-.0000006.0000005-.000001.000001-.0000015.0000014l-7.6470562 7.4872708c-.3260715.3192576-.8547434.319263-1.1808215.0000116-.0000019-.0000018-.0000039-.0000037-.0000059-.0000058l-10.7749893-10.5496247c-.32607469-.3192544-.32607469-.8368682 0-1.1561226l2.38956395-2.3395823c.3260747-.31925446.85474652-.31925446 1.18082136 0l7.64733029 7.4873809c.0815188.0798136.2136866.0798136.2952054 0 .0000012-.0000012.0000023-.0000023.0000035-.0000032l7.6469471-7.4873777c.3260673-.31926181.8547392-.31927378 1.1808214-.0000267.0000046.0000045.0000091.000009.0000135.0000135l7.6473203 7.4873909c.0815186.0798135.2136866.0798135.2952053 0l7.6471967-7.4872433c.3260748-.31925458.8547465-.31925458 1.1808213 0z&quot; fill=&quot;#3b99fc&quot;></path>
+  </svg>
+</div>  </div> <div class=&quot;name svelte-1vlog3j&quot;>WalletConnect</div> </div></button></div> <div class=&quot;notice-container svelte-kpc6js&quot;><div class=&quot;container flex justify-between svelte-q2gson&quot;><div><div>Why don't I see my wallet?</div> <a class=&quot;link pointer&quot; href=&quot;https://www.blocknative.com/blog/metamask-wont-connect-web3-wallet-troubleshooting&quot; target=&quot;_blank&quot; rel=&quot;noreferrer noopener&quot;>Click here to learn more</a></div> <div class=&quot;icon svelte-q2gson&quot;>
+  <svg width=&quot;100%&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;>
+    <path d=&quot;M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM13 17H11V11H13V17ZM13 9H11V7H13V9Z&quot; fill=&quot;currentColor&quot;></path>
+  </svg>
+</div></div></div></div></div></div>  </div></div></div></div></div></div></div></div></section>      <div class=&quot;container flex flex-column fixed z-indexed svelte-g9s19b&quot; style=&quot;
+        top: var(--notify-onboard-container-position-top, 0); 
+        right: var(--notify-onboard-container-position-right, 0);; &quot;><div id=&quot;w3o-transaction-preview-container&quot;></div>  </div><style id=&quot;svelte-b3j15j&quot;>.container.svelte-b3j15j{--background-color:var(
+      --onboard-main-scroll-container-background,
+      var(--w3o-background-color)
+    );--foreground-color:var(--w3o-foreground-color);--text-color:var(--onboard-connect-text-color, var(--w3o-text-color));--border-color:var(--w3o-border-color, var(--gray-200));--action-color:var(--w3o-action-color, var(--primary-500));font-family:var(--onboard-font-family-normal, var(--font-family-normal));font-size:var(--onboard-font-size-5, 1rem);background:var(--background-color);color:var(--text-color);border-color:var(--border-color);line-height:24px;overflow:hidden;position:relative;display:flex;height:min-content;flex-flow:column-reverse}.content.svelte-b3j15j{width:var(--onboard-connect-content-width, 100%)}.header.svelte-b3j15j{display:flex;padding:1rem;border-bottom:1px solid transparent;background:var(--onboard-connect-header-background);color:var(--onboard-connect-header-color);border-color:var(--border-color)}.header-heading.svelte-b3j15j{line-height:1rem}.button-container.svelte-b3j15j{right:0.5rem;top:0.5rem}.mobile-header.svelte-b3j15j{display:flex;gap:0.5rem;height:4.5rem;padding:1rem;border-bottom:1px solid;border-color:var(--border-color)}.mobile-subheader.svelte-b3j15j{opacity:0.6;font-size:0.875rem;font-weight:400;line-height:1rem;margin-top:0.25rem}.icon-container.svelte-b3j15j{display:flex;flex:0 0 auto;height:2.5rem;width:2.5rem;min-width:2.5rem;justify-content:center;align-items:center}.disabled.svelte-b3j15j{opacity:0.2;pointer-events:none;overflow:hidden}.icon-container svg{display:block;height:100%;width:auto}.w-full.svelte-b3j15j{width:100%}.scroll-container.svelte-b3j15j{overflow-y:auto;transition:opacity 250ms ease-in-out;scrollbar-width:none}.scroll-container.svelte-b3j15j::-webkit-scrollbar{display:none}.mobile-safari.svelte-b3j15j{padding-bottom:80px}@media all and (min-width: 768px){.container.svelte-b3j15j{margin:0;flex-flow:row;height:var(--onboard-connect-content-height, 440px)}.content.svelte-b3j15j{width:var(--onboard-connect-content-width, 488px)}.mobile-subheader.svelte-b3j15j{display:none}.icon-container.svelte-b3j15j{display:none}}</style><style id=&quot;svelte-baitaa&quot;>section.svelte-baitaa{top:0;left:0;pointer-events:none;z-index:var(--onboard-modal-z-index, var(--modal-z-index))}.background.svelte-baitaa{background:var(--onboard-modal-backdrop, var(--modal-backdrop));pointer-events:all}.full-screen-background.svelte-baitaa{width:100vw;height:100vh}.max-height.svelte-baitaa{max-height:calc(100vh - 2rem)}.modal-position.svelte-baitaa{top:var(--onboard-modal-top, var(--modal-top));bottom:var(--onboard-modal-bottom, var(--modal-bottom));left:var(--onboard-modal-left, var(--modal-left));right:var(--onboard-modal-right, var(--modal-right))}.modal-overflow.svelte-baitaa{overflow:hidden}.modal-styling.svelte-baitaa{--border-radius:var(
+      --onboard-modal-border-radius,
+      var(--w3o-border-radius, 1rem)
+    );border-radius:var(--border-radius) var(--border-radius) 0 0;box-shadow:var(--onboard-modal-box-shadow, var(--box-shadow-0));max-width:100vw}.modal.svelte-baitaa{overflow-y:auto;background:var(--onboard-modal-background, white);color:var(--onboard-modal-color, initial)}.width-100.svelte-baitaa{width:100%}.modal-container-mobile.svelte-baitaa{bottom:0}@media all and (min-width: 768px){.modal-styling.svelte-baitaa{border-radius:var(--border-radius)}.modal-container-mobile.svelte-baitaa{bottom:unset;margin:1rem}.width-100.svelte-baitaa{width:unset}}</style><style id=&quot;svelte-obaru3&quot;>.sidebar.svelte-obaru3{--background-color:var(
+      --onboard-connect-sidebar-background,
+      var(--w3o-foreground-color, none)
+    );--text-color:var(--onboard-connect-sidebar-color, inherit);--border-color:var(--onboard-connect-sidebar-border-color, inherit);display:flex;flex-flow:column;gap:1rem;padding:1rem;align-items:center}.inner-container.svelte-obaru3{display:flex;flex-flow:column;align-items:center;align-self:stretch;gap:0.5rem;padding:1.5rem;text-align:center;border:1px solid transparent;border-radius:12px;border-color:var(--border-color);background:var(--background-color);color:var(--text-color)}.icon-container.svelte-obaru3{display:flex;height:3.5rem;width:auto;min-width:3.5rem;max-width:100%}.heading.svelte-obaru3{font-size:var(--onboard-font-size-3, var(--font-size-3));margin:0 0 var(--onboard-spacing-5, var(--spacing-5)) 0}.subheading.svelte-obaru3{line-height:1rem}.description.svelte-obaru3{line-height:1.25rem;font-size:var(--onboard-font-size-6, var(--font-size-6))}img.svelte-obaru3{max-width:100%;height:auto}.indicators.svelte-obaru3{margin-top:auto}.indicator.svelte-obaru3{box-sizing:content-box;width:8px;height:8px;border-radius:8px;background:var(
+      --onboard-connect-sidebar-progress-background,
+      var(--onboard-gray-700, var(--gray-700))
+    );transition:background 250ms ease-in-out}.indicator.on.svelte-obaru3{background:var(
+      --onboard-connect-sidebar-progress-color,
+      var(--action-color)
+    );border:2px solid
+      var(
+        --onboard-connect-sidebar-progress-background,
+        var(--onboard-gray-700, var(--gray-700))
+      )}.join.svelte-obaru3{box-sizing:content-box;z-index:1;right:4px;height:2px;background:var(
+      --onboard-connect-sidebar-progress-background,
+      var(--onboard-gray-700, var(--gray-700))
+    );transition:background 250ms ease-in-out}.join.active.svelte-obaru3{background:var(
+      --onboard-connect-sidebar-progress-color,
+      var(--action-color)
+    )}.no-link.svelte-obaru3{display:flex;flex-direction:row;align-items:center;padding:0.25rem 0.5rem 0.25rem 0.75rem;gap:0.25rem;font-size:var(--onboard-font-size-6, var(--font-size-6))}.info-icon.svelte-obaru3{width:1.25rem;display:flex;align-items:center}@media all and (min-width: 768px){.sidebar.svelte-obaru3{max-width:280px;border-right:1px solid;border-color:var(--border-color);background:var(--background-color)}.inner-container.svelte-obaru3{border:none;text-align:initial;flex:1;align-items:flex-start;gap:1rem}.indicators.svelte-obaru3{margin-bottom:0.25rem}}</style><style id=&quot;svelte-1ubf722&quot;>.close-button.svelte-1ubf722.svelte-1ubf722{position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;height:2rem;width:2rem;border-radius:2rem;cursor:pointer;color:var(--onboard-close-button-color, inherit)}.close-button.svelte-1ubf722.svelte-1ubf722:hover::before{opacity:0.2}.close-button.svelte-1ubf722:hover .svg-box.svelte-1ubf722{opacity:1}.close-button.svelte-1ubf722.svelte-1ubf722::before{content:'';position:absolute;height:inherit;width:inherit;opacity:0.1;background:currentColor;transition:300ms ease-in-out opacity}.svg-box.svelte-1ubf722.svelte-1ubf722{position:absolute;height:1.5rem;width:1.5rem;opacity:0.6;transition:300ms ease-in-out opacity}</style><style id=&quot;svelte-tz7ru1&quot;>.container.svelte-tz7ru1{padding:var(--onboard-spacing-4, var(--spacing-4));font-size:var(--onboard-font-size-6, var(--font-size-6));line-height:24px}input.svelte-tz7ru1{height:1rem;width:1rem;margin-right:0.5rem}</style><style id=&quot;svelte-kpc6js&quot;>.wallets-container.svelte-kpc6js{display:flex;gap:0.5rem;overflow-x:scroll;overflow-y:hidden;padding:0.75rem 0.5rem;border-bottom:1px solid var(--border-color);-ms-overflow-style:none;scrollbar-width:none}.wallets-container.svelte-kpc6js::-webkit-scrollbar{display:none}.warning-container.svelte-kpc6js{margin:1rem 1rem 0}.notice-container.svelte-kpc6js{flex:0 0 100%;margin-top:0.75rem}@media all and (min-width: 768px){.wallets-container.svelte-kpc6js{display:grid;grid-template-columns:repeat(var(--onboard-wallet-columns, 2), 1fr);padding:1rem;border:none}.notice-container.svelte-kpc6js{grid-column:span 2;margin:0}}</style><style id=&quot;svelte-1vlog3j&quot;>button.svelte-1vlog3j:disabled{opacity:0.5}button.wallet-button-styling.svelte-1vlog3j{position:relative;align-items:flex-start;flex:1;padding:0;background:none;color:var(--onboard-wallet-button-color, inherit)}.wallet-button-container.svelte-1vlog3j{display:flex}.wallet-button-container-inner.svelte-1vlog3j{position:relative;display:flex;flex-flow:column;align-items:center;gap:0.5rem;padding:0.75rem;width:5rem}.name.svelte-1vlog3j{font-size:var(--onboard-font-size-7, var(--font-size-7));line-height:1rem;text-overflow:ellipsis;max-width:5rem;max-height:2rem;overflow:hidden}.status-icon.svelte-1vlog3j{position:absolute;top:3.5rem;left:3.5rem}@media screen and (min-width: 768px){button.wallet-button-styling.svelte-1vlog3j{transition:background-color 250ms ease-in-out;background:var(--onboard-wallet-button-background, none);border:1px solid transparent;border-color:var(--onboard-wallet-button-border-color, var(--border-color));border-radius:var(--onboard-wallet-button-border-radius, var(--border-radius-1))}button.wallet-button-styling.svelte-1vlog3j:hover{background:var(--onboard-wallet-button-background-hover, var(--foreground-color));color:var(--onboard-wallet-button-color-hover)}.wallet-button-container-inner.svelte-1vlog3j{flex:1;flex-flow:row nowrap;gap:1rem;padding:1rem}button.connected.svelte-1vlog3j{border-color:var(--onboard-success-500, var(--success-500))}.name.svelte-1vlog3j{font-size:1rem;line-height:1.25rem;text-align:initial;max-width:inherit;max-height:3rem}.status-icon.svelte-1vlog3j{top:0;bottom:0;left:auto;right:1rem;margin:auto;height:20px}}</style><style id=&quot;svelte-i129jl&quot;>.icon.svelte-i129jl{height:100%}.border-custom.svelte-i129jl{border:1px solid var(--border-color)}.border-yellow.svelte-i129jl{border:1px solid var(--onboard-warning-500, var(--warning-500))}.border-gray.svelte-i129jl{border:1px solid var(--onboard-gray-400, var(--gray-400))}.border-green.svelte-i129jl{border:1px solid var(--onboard-success-500, var(--success-500))}.border-dark-green.svelte-i129jl{border:1px solid var(--onboard-success-700, var(--success-700))}.border-blue.svelte-i129jl{border:1px solid
+      var(
+        --onboard-wallet-app-icon-border-color,
+        var(--onboard-primary-300, var(--primary-300))
+      )}.border-dark-blue.svelte-i129jl{border:1px solid
+      var(
+        --onboard-wallet-app-icon-border-color,
+        var(--onboard-primary-600, var(--primary-600))
+      )}.border-transparent.svelte-i129jl{border:1px solid transparent}.border-black.svelte-i129jl{border:1px solid var(--onboard-gray-600, var(--gray-600))}.background-gray.svelte-i129jl{background:var(
+      --onboard-wallet-app-icon-background-gray,
+      var(--onboard-gray-500, var(--gray-500))
+    )}.background-light-gray.svelte-i129jl{background:var(
+      --onboard-wallet-app-icon-background-light-gray,
+      var(--onboard-gray-100, var(--gray-100))
+    )}.background-light-blue.svelte-i129jl{background:var(
+      --onboard-wallet-app-icon-background-light-blue,
+      var(--onboard-primary-100, var(--primary-100))
+    )}.background-green.svelte-i129jl{background:var(
+      --onboard-wallet-app-icon-background-green,
+      var(--onboard-success-100, var(--success-100))
+    )}.background-white.svelte-i129jl{background:var(
+      --onboard-wallet-app-icon-background-white,
+      var(--onboard-white, var(--white))
+    )}.background-transparent.svelte-i129jl{background:var(
+      --onboard-wallet-app-icon-background-transparent,
+      transparent
+    )}@keyframes svelte-i129jl-pulse{from{opacity:0}to{opacity:1}}.placeholder-icon.svelte-i129jl{width:100%;height:100%;background:var(--onboard-gray-100, var(--gray-100));border-radius:32px;animation:svelte-i129jl-pulse infinite 750ms alternate ease-in-out}.spinner-container.svelte-i129jl{color:var(--onboard-primary-300, var(--primary-300))}img.svelte-i129jl{max-width:100%;height:auto}.pending-status-icon{z-index:1;fill:white;box-shadow:0px 2px 12px 0px rgba(0, 0, 0, 0.1)}.status-icon-container.svelte-i129jl{right:-0.25rem;bottom:-0.25rem;position:absolute}</style><style id=&quot;svelte-q2gson&quot;>.container.svelte-q2gson{gap:1rem;padding:0.75rem;color:var(--onboard-warning-700, var(--warning-700));font-size:var(--onboard-font-size-7, var(--font-size-7));line-height:16px;border:1px solid var(--onboard-warning-400, var(--warning-400));background:var(--onboard-warning-100, var(--warning-100));border-radius:12px}.icon.svelte-q2gson{color:var(--onboard-warning-700, var(--warning-700));width:1rem;height:1rem;flex:0 0 auto}</style><style id=&quot;svelte-1h8mmo3&quot;>ul.svelte-1h8mmo3{padding-left:0;display:flex;flex-flow:column nowrap;font-size:var(
+      --notify-onboard-font-size,
+      var(--onboard-font-size-5, var(--font-size-5))
+    );list-style-type:none;overflow:visible;scrollbar-width:none;box-sizing:border-box;z-index:var(--notify-onboard-z-index, 300);font-family:var(
+      --notify-onboard-font-family,
+      var(--onboard-font-family-normal, inherit)
+    );margin:8px 0;pointer-events:all}.y-scroll.svelte-1h8mmo3{overflow-y:scroll}.y-visible.svelte-1h8mmo3{overflow-y:visible}li.notification-list-top.svelte-1h8mmo3:not(:first-child){margin-top:8px}li.notification-list-bottom.svelte-1h8mmo3:not(:first-child){margin-bottom:8px}ul.bn-notify-bottomLeft.svelte-1h8mmo3,ul.bn-notify-bottomRight.svelte-1h8mmo3{flex-direction:column-reverse}@media only screen and (max-width: 450px){ul.svelte-1h8mmo3{width:100%}}.bn-notify-clickable:hover{cursor:pointer}.svelte-1h8mmo3::-webkit-scrollbar{display:none}</style>"></onboard-v2>
+  <style>
+    @font-face {
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 300 600;
+      font-display: swap;
+      src: url("") format("woff2");
+    }
+  </style>
+ 
+</body>
+
+</html>
